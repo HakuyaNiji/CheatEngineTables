@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <Forms>
+    <CETrainer Class="TTrainerForm" Encoding="Ascii85">=Nu=4,cp(DNwG.uN$.BG)gV8QaFY?A4-}Raj+Yq{!O{I!Qk0e$TQE%.6n##DY)bX{oeFfgp{!zqvIWSVtz%K#,MvzWIa4W7wrr/P_3INZB%j^+zQ@}yr!NoyaoD,YJ(py:7!e(Vrk3YdyK8.(P?3mvvrDqkSekzWGv,gMvDdhlrE,Y3vv/QyWOhM3(ZOWJI$l4B^PuYq2WQa3GnsMLtnsdUG$Tx_(;X#Af.Bu(xwv,Gd/@W4LTr[L2orj5oJj%$:24y#XqPYLn?mv1@Q=#hKbr9/5ri.LArfKtz5drk/OKovd8;HtG?{Glk_N.5o+(I/Ce=;l/cI#ije_j%t(wgfYXF[A)EtD]w-7TzZU25ea6_XZ=]tQp!zpdJG#fG4#I+R%Zj%c[drVygw1yXbz9536]ZSo!jnfa@m60BVSg2haCzFxjbCx0$/6$6DB8*w-uZVi^T:HpqE,uD/,YZiST@3E*s0bT{Wkr8q68[eX#)WV9?-TaZtdjgx#eqoT;RwL.UbJ{.$a3@sSMBoh64=46%AOEo()X29[2lFP,_}zO6[+yVNvdt#ZWrup,bLgE4hSJ(4T^V%Ho9-vtMvoJc64q96Nb:T!54+E)0*hYDak]cfFzuy#=dW{;auK#3z0-KLQ=ZJxKX%vcrwoiB$3D_mn7A@56YcSvzgLZDL@NoE7Da#5vFafu(2nKOI_oyE4=?0eD}symp[zpRT71@JLGez/,;@ofNB^?KC]s0dQ([ijow%8U4OGe:5Jb3#/D@,1FZ-cNkL;XRzSdxRS$5gxIMDHuJ6XBMsK=.8FN+ZloZgdWw*-$[;-,qiUqWAE[9ZMwOMgl0W@YzlJcjuaZoVcGT,*ZZ)$$Rc74$Lw]sD}oL3utX1*VAyIee{lE/PIs?pW4-c%DnZXJFGb-dhZ.EBR$.z/Dw?uXyj?I/o!mAWJOm:f3::4YId(8EEC9ANK2U0$OsY99^=b-F=PrT=JswwKewUN,yyWfFE)+]r!Pe=EKu[Qziw-Q:YR5vUOlPW^Lm@uo9ooUOs8^_Wo%]:9?M[G%0E^b^jw=K]DYt81rp@uX9%UM-Kq[v}Bx([AJH!RExeT28Fv_0mXmC*P@umC_d4?0eY0e_lceuC-t7O5En!;.nG*</CETrainer>
+  </Forms>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1470</ID>
+      <Description>"收缩CE更简洁"</Description>
+      <Color>0000FF</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+
+function Routine(sender,force)
+  local state = not(mi.Caption == '简洁模式')
+  local mf = getMainForm()
+  if force ~= nil then state = not force end
+  mi.Caption = state and '简洁模式' or '正常模式'
+  mf.Splitter1.Visible = state
+  mf.Panel4.Visible    = state
+  mf.Panel5.Visible    = state
+end
+
+function Compact()
+  if CV_Exists then return end
+  local parent = getMainForm().Menu.Items
+  mi = createMenuItem(parent); parent.add(mi)
+  mi.Caption = '简洁模式'
+  mi.OnClick = Routine
+  CV_Exists = 'yes'
+end
+
+Compact()
+Routine(nil,true)
+
+[DISABLE]
+{$lua}
+if not syntaxcheck then Routine(nil,false) end
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>77</ID>
+      <Description>"无限法术"</Description>
+      <Color>8000FF</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : The king is watching
+  Version: 
+  Date   : 2025-08-02
+  Author : allen_wang
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(INJECT,The King is Watching.exe,F2 0F 11 01 48 83 C4 20 5B C3 48 FF 09) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+label(num)
+
+newmem:
+cmp r11, 0x0001A6BE
+jne code
+movsd xmm0,[num]
+
+code:
+  movsd [rcx],xmm0
+  add rsp,20
+  jmp return
+
+num:
+  dq (double)99.0
+
+INJECT:
+  jmp newmem
+  nop 3
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT:
+  db F2 0F 11 01 48 83 C4 20
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: The King is Watching.exe+8CB88
+
+The King is Watching.exe+8CB5D: 48 8D 0D 54 47 9D 01     - lea rcx,["The King is Watching.exe"+1A612B8]
+The King is Watching.exe+8CB64: E8 B7 B9 FD FF           - call "The King is Watching.exe"+68520
+The King is Watching.exe+8CB69: 48 8B C3                 - mov rax,rbx
+The King is Watching.exe+8CB6C: 48 83 C4 20              - add rsp,20
+The King is Watching.exe+8CB70: 5B                       - pop rbx
+The King is Watching.exe+8CB71: C3                       - ret 
+The King is Watching.exe+8CB72: C7 41 0C 00 00 00 00     - mov [rcx+0C],00000000
+The King is Watching.exe+8CB79: F2 0F 10 01              - movsd xmm0,[rcx]
+The King is Watching.exe+8CB7D: 48 8B C3                 - mov rax,rbx
+The King is Watching.exe+8CB80: F2 0F 5C 05 60 4A 9D 01  - subsd xmm0,["The King is Watching.exe"+1A615E8]
+// ---------- INJECTING HERE ----------
+The King is Watching.exe+8CB88: F2 0F 11 01              - movsd [rcx],xmm0
+// ---------- DONE INJECTING  ----------
+The King is Watching.exe+8CB8C: 48 83 C4 20              - add rsp,20
+The King is Watching.exe+8CB90: 5B                       - pop rbx
+The King is Watching.exe+8CB91: C3                       - ret 
+The King is Watching.exe+8CB92: 48 FF 09                 - dec qword ptr [rcx]
+The King is Watching.exe+8CB95: 48 8B C3                 - mov rax,rbx
+The King is Watching.exe+8CB98: 48 83 C4 20              - add rsp,20
+The King is Watching.exe+8CB9C: 5B                       - pop rbx
+The King is Watching.exe+8CB9D: C3                       - ret 
+The King is Watching.exe+8CB9E: FF 09                    - dec [rcx]
+The King is Watching.exe+8CBA0: 48 8B C3                 - mov rax,rbx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>74</ID>
+      <Description>"无限凝视（需凝视过后生效）"</Description>
+      <Color>8000FF</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : The king is watching
+  Version: 
+  Date   : 2025-08-02
+  Author : allen_wang
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(INJECT,The King is Watching.exe,F2 41 0F 11 36 B9 01 00 00 00) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+label(true)
+newmem:
+movsd xmm6,[true]
+
+code:
+  movsd [r14],xmm6
+  jmp return
+
+true:
+  dq (double)1.0
+
+INJECT:
+  jmp newmem
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT:
+  db F2 41 0F 11 36
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: The King is Watching.exe+F7BC22
+
+The King is Watching.exe+F7BC00: B8 01 00 00 00           - mov eax,00000001
+The King is Watching.exe+F7BC05: D3 E0                    - shl eax,cl
+The King is Watching.exe+F7BC07: A8 46                    - test al,46
+The King is Watching.exe+F7BC09: 74 08                    - je "The King is Watching.exe"+F7BC13
+The King is Watching.exe+F7BC0B: 49 8B CE                 - mov rcx,r14
+The King is Watching.exe+F7BC0E: E8 6D C0 0E FF           - call "The King is Watching.exe"+67C80
+The King is Watching.exe+F7BC13: 41 C7 46 0C 0D 00 00 00  - mov [r14+0C],0000000D
+The King is Watching.exe+F7BC1B: 84 DB                    - test bl,bl
+The King is Watching.exe+F7BC1D: 75 03                    - jne "The King is Watching.exe"+F7BC22
+The King is Watching.exe+F7BC1F: 0F 57 F6                 - xorps xmm6,xmm6
+// ---------- INJECTING HERE ----------
+The King is Watching.exe+F7BC22: F2 41 0F 11 36           - movsd [r14],xmm6
+// ---------- DONE INJECTING  ----------
+The King is Watching.exe+F7BC27: B9 01 00 00 00           - mov ecx,00000001
+The King is Watching.exe+F7BC2C: E8 DF 25 17 00           - call "The King is Watching.exe"+10EE210
+The King is Watching.exe+F7BC31: C7 44 24 70 75 00 00 00  - mov [rsp+70],00000075
+The King is Watching.exe+F7BC39: 41 83 FC 01              - cmp r12d,01
+The King is Watching.exe+F7BC3D: 7E 04                    - jle "The King is Watching.exe"+F7BC43
+The King is Watching.exe+F7BC3F: 49 8B 77 08              - mov rsi,[r15+08]
+The King is Watching.exe+F7BC43: 48 8B CE                 - mov rcx,rsi
+The King is Watching.exe+F7BC46: E8 75 B4 15 00           - call "The King is Watching.exe"+10D70C0
+The King is Watching.exe+F7BC4B: 84 C0                    - test al,al
+The King is Watching.exe+F7BC4D: 0F 84 BE 02 00 00        - je "The King is Watching.exe"+F7BF11
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>92</ID>
+      <Description>"快速收集资源"</Description>
+      <Options moHideChildren="1"/>
+      <Color>8000FF</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : The King is Watching.exe
+  Version:
+  Date   : 2025-08-09
+  Author : 12489
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+
+
+aobscanmodule(INJECT,The King is Watching.exe,49 8B 06 48 89 44 24 60 0F BA EF 0B) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+label(time)
+registersymbol(time)
+
+newmem:
+  movsd xmm1,[time]
+  movsd [rax],xmm1
+code:
+  mov rax,[r14]
+  mov [rsp+60],rax
+  jmp return
+time:
+  dq (double)5.0
+INJECT:
+  jmp newmem
+  nop 3
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT:
+  db 49 8B 06 48 89 44 24 60
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: The King is Watching.exe+CEA738
+
+The King is Watching.exe+CEA719: 89 54 24 68           - mov [rsp+68],edx
+The King is Watching.exe+CEA71D: 83 E1 1F              - and ecx,1F
+The King is Watching.exe+CEA720: 8B D3                 - mov edx,ebx
+The King is Watching.exe+CEA722: D3 E2                 - shl edx,cl
+The King is Watching.exe+CEA724: F6 C2 46              - test dl,46
+The King is Watching.exe+CEA727: 74 0F                 - je "The King is Watching.exe"+CEA738
+The King is Watching.exe+CEA729: 49 8B D6              - mov rdx,r14
+The King is Watching.exe+CEA72C: 48 8D 4C 24 60        - lea rcx,[rsp+60]
+The King is Watching.exe+CEA731: E8 EA E5 37 FF        - call "The King is Watching.exe"+68D20
+The King is Watching.exe+CEA736: EB 08                 - jmp "The King is Watching.exe"+CEA740
+// ---------- INJECTING HERE ----------
+The King is Watching.exe+CEA738: 49 8B 06              - mov rax,[r14]
+// ---------- DONE INJECTING  ----------
+The King is Watching.exe+CEA73B: 48 89 44 24 60        - mov [rsp+60],rax
+The King is Watching.exe+CEA740: 0F BA EF 0B           - bts edi,0B
+The King is Watching.exe+CEA744: 89 BD C0 03 00 00     - mov [rbp+000003C0],edi
+The King is Watching.exe+CEA74A: 49 8B D7              - mov rdx,r15
+The King is Watching.exe+CEA74D: 48 8D 4C 24 60        - lea rcx,[rsp+60]
+The King is Watching.exe+CEA752: E8 29 5E 38 FF        - call "The King is Watching.exe"+70580
+The King is Watching.exe+CEA757: 45 33 FF              - xor r15d,r15d
+The King is Watching.exe+CEA75A: 44 89 7C 24 5C        - mov [rsp+5C],r15d
+The King is Watching.exe+CEA75F: F2 44 0F 11 5C 24 50  - movsd [rsp+50],xmm11
+The King is Watching.exe+CEA766: 41 B1 01              - mov r9b,01
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>93</ID>
+          <Description>"1=超级快 0=究极快"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <Color>4080FF</Color>
+          <VariableType>Double</VariableType>
+          <Address>time</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1475</ID>
+      <Description>"快速收集资源3（凝视地格瞬间完成，务必暂停使用）"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : The King is Watching.exe
+  Version: 
+  Date   : 2025-08-12
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Tile,The King is Watching.exe,E8 CB 8E 1A FF) // should be unique
+alloc(newmem,$100,Tile)
+
+label(code)
+label(return)
+
+label(timemul)
+registersymbol(timemul)
+
+newmem:
+  mulsd xmm0,[timemul]
+code:
+  movups [rsp+50],xmm0
+  jmp return
+timemul:
+  dq (double)0
+
+Tile-18:
+  jmp newmem
+return:
+registersymbol(Tile)
+
+[DISABLE]
+Tile-18:
+  db 0F 11 44 24 50
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: The King is Watching.exe+ECBE74
+
+The King is Watching.exe+ECBE52: FF 50 08           - call qword ptr [rax+08]
+The King is Watching.exe+ECBE55: 4C 8B F0           - mov r14,rax
+The King is Watching.exe+ECBE58: 4C 8B 06           - mov r8,[rsi]
+The King is Watching.exe+ECBE5B: 8B 15 D7 BE 2D 01  - mov edx,["The King is Watching.exe"+21A7D38]
+The King is Watching.exe+ECBE61: 48 8B CE           - mov rcx,rsi
+The King is Watching.exe+ECBE64: 41 FF 50 10        - call qword ptr [r8+10]
+The King is Watching.exe+ECBE68: 48 8B D8           - mov rbx,rax
+The King is Watching.exe+ECBE6B: 48 8D 45 C0        - lea rax,[rbp-40]
+The King is Watching.exe+ECBE6F: 4C 3B F0           - cmp r14,rax
+The King is Watching.exe+ECBE72: 74 2F              - je "The King is Watching.exe"+ECBEA3
+// ---------- INJECTING HERE ----------
+The King is Watching.exe+ECBE74: 41 0F 10 06        - movups xmm0,[r14]
+// ---------- DONE INJECTING  ----------
+The King is Watching.exe+ECBE78: 0F 11 44 24 50     - movups [rsp+50],xmm0
+The King is Watching.exe+ECBE7D: 8B 4D CC           - mov ecx,[rbp-34]
+The King is Watching.exe+ECBE80: 83 E1 1F           - and ecx,1F
+The King is Watching.exe+ECBE83: 8B D7              - mov edx,edi
+The King is Watching.exe+ECBE85: D3 E2              - shl edx,cl
+The King is Watching.exe+ECBE87: F6 C2 46           - test dl,46
+The King is Watching.exe+ECBE8A: 74 09              - je "The King is Watching.exe"+ECBE95
+The King is Watching.exe+ECBE8C: 48 8D 4D C0        - lea rcx,[rbp-40]
+The King is Watching.exe+ECBE90: E8 CB 8E 1A FF     - call "The King is Watching.exe"+74D60
+The King is Watching.exe+ECBE95: 48 8D 54 24 50     - lea rdx,[rsp+50]
+}
+</AssemblerScript>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Toggle Activation</Action>
+          <Keys>
+            <Key>6</Key>
+          </Keys>
+          <ID>0</ID>
+          <ActivateSound TTS="EN">Activated</ActivateSound>
+          <DeactivateSound TTS="EN">Deactivated</DeactivateSound>
+        </Hotkey>
+      </Hotkeys>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1480</ID>
+          <Description>"暂停时工作倍率（0-1），为零瞬间完成"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Double</VariableType>
+          <Address>timemul</Address>
+          <Hotkeys>
+            <Hotkey OnlyWhileDown="1">
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>5</Key>
+              </Keys>
+              <Value>0</Value>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>70</ID>
+      <Description>"资源倍率"</Description>
+      <Options moHideChildren="1"/>
+      <Color>8000FF</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : The king is watching
+  Version: 
+  Date   : 2025-08-02
+  Author : allen_wang
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(INJECT,The King is Watching.exe,48 8B 06 48 89 47 10 ?? ?? ?? ?? ?? 48 8B CD) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+label(multiple)
+registerSymbol(multiple)
+
+newmem:
+
+mov rax,[rsi]
+movq xmm14, rax
+movq xmm15, [rdi+10]
+cmppd xmm14, xmm15, 0x1E
+ptest xmm14, xmm14
+jne newmem3
+mov rax,[rsi]
+mov [rdi+10],rax
+jmp return
+
+newmem3:
+movq xmm14, rax
+movq xmm15, [rdi+10]
+subsd xmm14, xmm15
+ptest xmm14, xmm14
+jne newmem2
+mov rax,[rsi]
+jne code
+
+
+newmem2:
+mulsd xmm14, [multiple]
+addsd xmm14, xmm15
+movq rax, xmm14
+
+code:
+  mov [rdi+10],rax
+  jmp return
+
+multiple:
+  dq (double)200.0
+
+INJECT:
+  jmp newmem
+  nop 2
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+INJECT:
+  db 48 8B 06 48 89 47 10
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: The King is Watching.exe+113BF97
+
+The King is Watching.exe+113BF6F: 48 89 47 10        - mov [rdi+10],rax
+The King is Watching.exe+113BF73: E9 2E 01 00 00     - jmp "The King is Watching.exe"+113C0A6
+The King is Watching.exe+113BF78: 41 83 E0 1F        - and r8d,1F
+The King is Watching.exe+113BF7C: B8 01 00 00 00     - mov eax,00000001
+The King is Watching.exe+113BF81: 41 0F B6 C8        - movzx ecx,r8b
+The King is Watching.exe+113BF85: D3 E0              - shl eax,cl
+The King is Watching.exe+113BF87: A9 44 08 00 00     - test eax,00000844
+The King is Watching.exe+113BF8C: 74 09              - je "The King is Watching.exe"+113BF97
+The King is Watching.exe+113BF8E: 48 8B 4F 10        - mov rcx,[rdi+10]
+The King is Watching.exe+113BF92: E8 69 E0 FB FF     - call "The King is Watching.exe"+10FA000
+// ---------- INJECTING HERE ----------
+The King is Watching.exe+113BF97: 48 8B 06           - mov rax,[rsi]
+// ---------- DONE INJECTING  ----------
+The King is Watching.exe+113BF9A: 48 89 47 10        - mov [rdi+10],rax
+The King is Watching.exe+113BF9E: E9 03 01 00 00     - jmp "The King is Watching.exe"+113C0A6
+The King is Watching.exe+113BFA3: 48 8B CD           - mov rcx,rbp
+The King is Watching.exe+113BFA6: E8 95 BF FF FF     - call "The King is Watching.exe"+1137F40
+The King is Watching.exe+113BFAB: 8B F8              - mov edi,eax
+The King is Watching.exe+113BFAD: 48 85 DB           - test rbx,rbx
+The King is Watching.exe+113BFB0: 0F 84 9A 00 00 00  - je "The King is Watching.exe"+113C050
+The King is Watching.exe+113BFB6: 44 8B 43 0C        - mov r8d,[rbx+0C]
+The King is Watching.exe+113BFBA: 41 8B C8           - mov ecx,r8d
+The King is Watching.exe+113BFBD: 83 E1 1F           - and ecx,1F
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>71</ID>
+          <Description>"倍率"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <Color>4080FF</Color>
+          <VariableType>Double</VariableType>
+          <Address>multiple</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1482</ID>
+      <Description>"部队上限"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : The King is Watching.exe
+  Version: 
+  Date   : 2025-08-14
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(Army,The King is Watching.exe,22 FF EB 08 49 8B 06 48 89 44 24 30) // should be unique
+alloc(newmemArmy,$100,Army)
+label(codeArmy)
+label(returnArmy)
+
+label(ArmyLimit)
+registersymbol(ArmyLimit)
+
+newmemArmy:
+  mov [ArmyLimit],r14
+codeArmy:
+  mov rax,[r14]
+  mov [rsp+30],rax
+  jmp returnArmy
+ArmyLimit:
+  dd
+
+Army+04:
+  jmp newmemArmy
+  nop 3
+
+returnArmy:
+registersymbol(Army)
+
+[DISABLE]
+
+Army+04:
+  db 49 8B 06 48 89 44 24 30
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: The King is Watching.exe+C64630
+
+The King is Watching.exe+C64610: 83 E1 1F              - and ecx,1F
+The King is Watching.exe+C64613: BB 01 00 00 00        - mov ebx,00000001
+The King is Watching.exe+C64618: 8B D3                 - mov edx,ebx
+The King is Watching.exe+C6461A: D3 E2                 - shl edx,cl
+The King is Watching.exe+C6461C: F6 C2 46              - test dl,46
+The King is Watching.exe+C6461F: 74 0F                 - je "The King is Watching.exe"+C64630
+The King is Watching.exe+C64621: 49 8B D6              - mov rdx,r14
+The King is Watching.exe+C64624: 48 8D 4C 24 30        - lea rcx,[rsp+30]
+The King is Watching.exe+C64629: E8 F2 46 40 FF        - call "The King is Watching.exe"+68D20
+The King is Watching.exe+C6462E: EB 08                 - jmp "The King is Watching.exe"+C64638
+// ---------- INJECTING HERE ----------
+The King is Watching.exe+C64630: 49 8B 06              - mov rax,[r14]
+// ---------- DONE INJECTING  ----------
+The King is Watching.exe+C64633: 48 89 44 24 30        - mov [rsp+30],rax
+The King is Watching.exe+C64638: 89 9C 24 A0 00 00 00  - mov [rsp+000000A0],ebx
+The King is Watching.exe+C6463F: 48 8B D7              - mov rdx,rdi
+The King is Watching.exe+C64642: 48 8D 4C 24 30        - lea rcx,[rsp+30]
+The King is Watching.exe+C64647: E8 C4 4B 40 FF        - call "The King is Watching.exe"+69210
+The King is Watching.exe+C6464C: 48 8D 44 24 30        - lea rax,[rsp+30]
+The King is Watching.exe+C64651: 48 3B C6              - cmp rax,rsi
+The King is Watching.exe+C64654: 74 2F                 - je "The King is Watching.exe"+C64685
+The King is Watching.exe+C64656: 0F 28 44 24 30        - movaps xmm0,[rsp+30]
+The King is Watching.exe+C6465B: 66 0F 7F 44 24 50     - movdqa [rsp+50],xmm0
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1483</ID>
+          <Description>"部队上限"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Double</VariableType>
+          <Address>ArmyLimit</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>关于表格信息:
+</Comments>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>"The King is Watching.exe"+89FED6</Address>
+      <Comment>%s CHECK HERE---------------
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"The King is Watching.exe"+89FF25</Address>
+      <Comment>%s JUMP HERE 2
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"The King is Watching.exe"+CE82F4</Address>
+      <Comment>%s JUMP HERE
+</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>
