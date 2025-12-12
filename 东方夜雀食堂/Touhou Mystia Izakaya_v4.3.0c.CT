@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <Forms>
+    <UDF1 Class="TCEForm" Encoding="Ascii85">%V1z(2nldAU:MM2b.}cxWeIh0Gi32eO*FvE%+f]Enwg$a!mPu^9Fkwa,^=fko_#gT0pzngCl-]s:I612*$[Wf7H6jCg:FTY1[XFAPhjBkarOyIEh,{7U@mhOK=4Q]00</UDF1>
+  </Forms>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>199</ID>
+      <Description>"白天阶段"</Description>
+      <Options moDeactivateChildrenAsWell="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>185</ID>
+          <Description>"采集物立即刷新"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-03-22
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(CollectCD,GameAssembly.dll,8B 41 28 03 C0) // should be unique
+alloc(newmem,$1000,CollectCD)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov eax,[rcx+28]
+  mov eax,0
+  jmp return
+
+CollectCD:
+  jmp newmem
+return:
+registersymbol(CollectCD)
+
+[DISABLE]
+
+CollectCD:
+  db 8B 41 28 03 C0
+
+unregistersymbol(CollectCD)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameData.Core.Collections.DaySceneUtility.Collections.Collectable.GetRegenerateActions
+
+GameAssembly.dll+70D122: E8 19 F1 C2 FF  - call GameAssembly.il2cpp_method_get_class+90
+GameAssembly.dll+70D127: CC              - int 3 
+GameAssembly.dll+70D128: CC              - int 3 
+GameAssembly.dll+70D129: CC              - int 3 
+GameAssembly.dll+70D12A: CC              - int 3 
+GameAssembly.dll+70D12B: CC              - int 3 
+GameAssembly.dll+70D12C: CC              - int 3 
+GameAssembly.dll+70D12D: CC              - int 3 
+GameAssembly.dll+70D12E: CC              - int 3 
+GameAssembly.dll+70D12F: CC              - int 3 
+// ---------- INJECTING HERE ----------
+GameData.Core.Collections.DaySceneUtility.Collections.Collectable.GetRegenerateActions: 8B 41 28        - mov eax,[rcx+28]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+70D133: 03 C0           - add eax,eax
+GameAssembly.dll+70D135: C3              - ret 
+GameAssembly.dll+70D136: CC              - int 3 
+GameAssembly.dll+70D137: CC              - int 3 
+GameAssembly.dll+70D138: CC              - int 3 
+GameAssembly.dll+70D139: CC              - int 3 
+GameAssembly.dll+70D13A: CC              - int 3 
+GameAssembly.dll+70D13B: CC              - int 3 
+GameAssembly.dll+70D13C: CC              - int 3 
+GameAssembly.dll+70D13D: CC              - int 3 
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>194</ID>
+          <Description>"邀请稀客必定成功"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-03-23
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(InviteChance,GameAssembly.dll,0F 2F C8 40 0F 93 C7) // should be unique
+alloc(newmemd,$1000,InviteChance)
+
+label(coded)
+label(returnd)
+
+newmemd:
+  xorps xmm0,xmm0
+coded:
+  comiss xmm1,xmm0
+  setae dil
+  jmp returnd
+
+InviteChance:
+  jmp newmemd
+  nop 2
+returnd:
+registersymbol(InviteChance)
+
+[DISABLE]
+
+InviteChance:
+  db 0F 2F C8 40 0F 93 C7
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+8F6D8A
+
+GameAssembly.dll+8F6D5A: 45 33 C0                 - xor r8d,r8d
+GameAssembly.dll+8F6D5D: 0F 57 C0                 - xorps xmm0,xmm0
+GameAssembly.dll+8F6D60: E8 7B 65 3F 02           - call UnityEngine.Random.Range
+GameAssembly.dll+8F6D65: F3 0F 10 0D B7 35 67 02  - movss xmm1,[GameAssembly.dll+2F6A324]
+GameAssembly.dll+8F6D6D: EB 1B                    - jmp GameAssembly.dll+8F6D8A
+GameAssembly.dll+8F6D6F: F3 0F 10 0D 05 FF 66 02  - movss xmm1,[GameAssembly.dll+2F66C7C]
+GameAssembly.dll+8F6D77: 45 33 C0                 - xor r8d,r8d
+GameAssembly.dll+8F6D7A: 0F 57 C0                 - xorps xmm0,xmm0
+GameAssembly.dll+8F6D7D: E8 5E 65 3F 02           - call UnityEngine.Random.Range
+GameAssembly.dll+8F6D82: F3 0F 10 0D EA FE 66 02  - movss xmm1,[GameAssembly.dll+2F66C74]
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+8F6D8A: 0F 2F C8                 - comiss xmm1,xmm0
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+8F6D8D: 40 0F 93 C7              - setae dil
+GameAssembly.dll+8F6D91: 45 33 C9                 - xor r9d,r9d
+GameAssembly.dll+8F6D94: 44 0F B6 C7              - movzx r8d,dil
+GameAssembly.dll+8F6D98: 8B D5                    - mov edx,ebp
+GameAssembly.dll+8F6D9A: 48 8B CE                 - mov rcx,rsi
+GameAssembly.dll+8F6D9D: E8 8E F5 D8 FF           - call GameData.Core.Collections.NightSceneUtility.SpecialGuest.GetInviteDialogPackageAtKizunaLevel
+GameAssembly.dll+8F6DA2: 48 8B 15 B7 FE 92 03     - mov rdx,[GameAssembly.dll+4226C60]
+GameAssembly.dll+8F6DA9: 48 8B C8                 - mov rcx,rax
+GameAssembly.dll+8F6DAC: E8 3F 6E 4C 00           - call GameAssembly.dll+DBDBF0
+GameAssembly.dll+8F6DB1: 48 8B D0                 - mov rdx,rax
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>173</ID>
+          <Description>"真实时间"</Description>
+          <DropDownList DisplayValueAsItem="1">0:1800
+1:1730
+2:1700
+3:1630
+4:1600
+5:1530
+6:1500
+7:1430
+8:1400
+9:1330
+10:1300
+11:1230
+12:1200
+13:1130
+14:1100
+15:1030
+16:1000
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameAssembly.dll+41FCBF0</Address>
+          <Offsets>
+            <Offset>68</Offset>
+            <Offset>b8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>207</ID>
+          <Description>"显示时间（与真实时间不强制同步）"</Description>
+          <DropDownList DisplayValueAsItem="1">0:1800
+1:1730
+2:1700
+3:1630
+4:1600
+5:1530
+6:1500
+7:1430
+8:1400
+9:1330
+10:1300
+11:1230
+12:1200
+13:1130
+14:1100
+15:1030
+16:1000
+</DropDownList>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>GameAssembly.dll+42AA640</Address>
+          <Offsets>
+            <Offset>128</Offset>
+            <Offset>0</Offset>
+            <Offset>b8</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>200</ID>
+      <Description>"夜晚营业阶段（部分对非常规营业无效）"</Description>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>165</ID>
+          <Description>"buff时长不减（正面与负面同时生效）"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(Dec_SpellEffect_AOB,GameAssembly.dll,8B 57 28 FF CA 89 57 28) // should be unique
+Dec_SpellEffect_AOB+3:
+  db 90 90
+registersymbol(Dec_SpellEffect_AOB)
+
+[DISABLE]
+
+Dec_SpellEffect_AOB+3:
+  db FF CA
+unregistersymbol(Dec_SpellEffect_AOB)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll.il2cpp+30EEF5
+ScheduledFunction.UpdateTime
+GameAssembly.dll.il2cpp+30EEDD: CC           - int 3
+GameAssembly.dll.il2cpp+30EEDE: CC           - int 3
+GameAssembly.dll.il2cpp+30EEDF: CC           - int 3
+ScheduledFunction.UpdateTime: 40 53        - push rbx
+GameAssembly.dll.il2cpp+30EEE2: 48 83 EC 20  - sub rsp,20
+GameAssembly.dll.il2cpp+30EEE6: 48 8B 41 20  - mov rax,[rcx+20]
+GameAssembly.dll.il2cpp+30EEEA: 48 8B D9     - mov rbx,rcx
+GameAssembly.dll.il2cpp+30EEED: 48 85 C0     - test rax,rax
+GameAssembly.dll.il2cpp+30EEF0: 74 13        - je GameAssembly.dll.il2cpp+30EF05
+GameAssembly.dll.il2cpp+30EEF2: 8B 51 10     - mov edx,[rcx+10]
+// ---------- INJECTING HERE ----------
+GameAssembly.dll.il2cpp+30EEF5: FF CA        - dec edx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll.il2cpp+30EEF7: 89 51 10     - mov [rcx+10],edx
+GameAssembly.dll.il2cpp+30EEFA: 4C 8B 40 28  - mov r8,[rax+28]
+GameAssembly.dll.il2cpp+30EEFE: 48 8B 48 40  - mov rcx,[rax+40]
+GameAssembly.dll.il2cpp+30EF02: FF 50 18     - call qword ptr [rax+18]
+GameAssembly.dll.il2cpp+30EF05: 83 7B 10 00  - cmp dword ptr [rbx+10],00
+GameAssembly.dll.il2cpp+30EF09: 7F 0F        - jg GameAssembly.dll.il2cpp+30EF1A
+GameAssembly.dll.il2cpp+30EF0B: 33 D2        - xor edx,edx
+GameAssembly.dll.il2cpp+30EF0D: 48 8B CB     - mov rcx,rbx
+GameAssembly.dll.il2cpp+30EF10: 48 83 C4 20  - add rsp,20
+GameAssembly.dll.il2cpp+30EF14: 5B           - pop rbx
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>166</ID>
+          <Description>"料理原材料不减少"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule(Call_RemoveItem_AOB,GameAssembly.dll,44 8D 40 FF E8 * * * * 40 84 F6) // should be unique
+alloc(RemoveItem_CodeSave,5)
+RemoveItem_CodeSave:
+  readmem(Call_RemoveItem_AOB+4,5)
+registersymbol(RemoveItem_CodeSave)
+
+Call_RemoveItem_AOB+4:
+  nop 5
+registersymbol(Call_RemoveItem_AOB)
+
+[DISABLE]
+
+Call_RemoveItem_AOB+4:
+  readmem(RemoveItem_CodeSave,5)
+unregistersymbol(Call_RemoveItem_AOB)
+
+unregistersymbol(RemoveItem_CodeSave)
+dealloc(RemoveItem_CodeSave)
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+4DEA65
+GameData.RunTime.Common.RunTimeStorage.ObjectOut
+
+GameAssembly.dll+4DEA3F: 8B D7                 - mov edx,edi
+GameAssembly.dll+4DEA41: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll+4DEA44: 83 F8 01              - cmp eax,01
+GameAssembly.dll+4DEA47: 74 74                 - je GameAssembly.dll+4DEABD
+GameAssembly.dll+4DEA49: 4C 8B 05 68 8D AD 02  - mov r8,[GameAssembly.dll+2FB77B8]
+GameAssembly.dll+4DEA50: E8 1B FB C0 00        - call GameAssembly.dll+10EE570
+GameAssembly.dll+4DEA55: 4C 8B 0D 0C 8F AD 02  - mov r9,[GameAssembly.dll+2FB7968]
+GameAssembly.dll+4DEA5C: 8B D7                 - mov edx,edi
+GameAssembly.dll+4DEA5E: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll+4DEA61: 44 8D 40 FF           - lea r8d,[rax-01]
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+4DEA65: E8 B6 A1 BD 00        - call GameAssembly.dll+10B8C20
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+4DEA6A: 40 84 F6              - test sil,sil
+GameAssembly.dll+4DEA6D: 75 3E                 - jne GameAssembly.dll+4DEAAD
+GameAssembly.dll+4DEA6F: 40 38 35 DB D0 C7 02  - cmp [GameAssembly.dll+315BB51],sil
+GameAssembly.dll+4DEA76: 75 13                 - jne GameAssembly.dll+4DEA8B
+GameAssembly.dll+4DEA78: 48 8D 0D E9 4B B1 02  - lea rcx,[GameAssembly.dll+2FF3668]
+GameAssembly.dll+4DEA7F: E8 BC 0D DB FF        - call GameAssembly.mono_type_is_struct+580
+GameAssembly.dll+4DEA84: C6 05 C6 D0 C7 02 01  - mov byte ptr [GameAssembly.dll+315BB51],01
+GameAssembly.dll+4DEA8B: 48 8B 05 D6 4B B1 02  - mov rax,[GameAssembly.dll+2FF3668]
+GameAssembly.dll+4DEA92: 48 8B 88 B8 00 00 00  - mov rcx,[rax+000000B8]
+GameAssembly.dll+4DEA99: 48 8B 41 08           - mov rax,[rcx+08]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>189</ID>
+          <Description>"料理立即完成（仅限老板娘）"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-03-22
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(InsCook,GameAssembly.dll,F3 0F 11 43 74 C7) // should be unique
+alloc(newmemb,$1000,InsCook)
+
+label(codeb)
+label(returnb)
+
+newmemb:
+  xorps xmm0,xmm0
+codeb:
+  movss [rbx+74],xmm0
+  jmp returnb
+
+InsCook:
+  jmp newmemb
+returnb:
+
+registersymbol(InsCook)
+
+[DISABLE]
+
+InsCook:
+  db F3 0F 11 43 74
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+5297F1
+
+GameAssembly.dll+5297C6: F3 0F 10 0D 3A D8 A3 02        - movss xmm1,[GameAssembly.dll+2F67008]
+GameAssembly.dll+5297CE: F3 0F 59 C6                    - mulss xmm0,xmm6
+GameAssembly.dll+5297D2: 0F 2F C8                       - comiss xmm1,xmm0
+GameAssembly.dll+5297D5: 77 0D                          - ja GameAssembly.dll+5297E4
+GameAssembly.dll+5297D7: F3 0F 10 0D 51 D8 A3 02        - movss xmm1,[GameAssembly.dll+2F67030]
+GameAssembly.dll+5297DF: 0F 2F C1                       - comiss xmm0,xmm1
+GameAssembly.dll+5297E2: 76 0D                          - jna GameAssembly.dll+5297F1
+GameAssembly.dll+5297E4: 0F 28 C1                       - movaps xmm0,xmm1
+GameAssembly.dll+5297E7: EB 08                          - jmp GameAssembly.dll+5297F1
+GameAssembly.dll+5297E9: F3 0F 10 05 17 D8 A3 02        - movss xmm0,[GameAssembly.dll+2F67008]
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+5297F1: F3 0F 11 43 74                 - movss [rbx+74],xmm0
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+5297F6: C7 83 9C 00 00 00 01 00 00 00  - mov [rbx+0000009C],00000001
+GameAssembly.dll+529800: 48 85 FF                       - test rdi,rdi
+GameAssembly.dll+529803: 0F 84 F8 00 00 00              - je GameAssembly.dll+529901
+GameAssembly.dll+529809: 48 8B 17                       - mov rdx,[rdi]
+GameAssembly.dll+52980C: 48 8B CF                       - mov rcx,rdi
+GameAssembly.dll+52980F: 48 8B 82 C8 01 00 00           - mov rax,[rdx+000001C8]
+GameAssembly.dll+529816: 48 8B 92 D0 01 00 00           - mov rdx,[rdx+000001D0]
+GameAssembly.dll+52981D: FF D0                          - call rax
+GameAssembly.dll+52981F: 48 8B 0D 72 37 C9 03           - mov rcx,[GameAssembly.dll+41BCF98]
+GameAssembly.dll+529826: 48 8B F0                       - mov rsi,rax
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>192</ID>
+          <Description>"营业时间暂停"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-03-22
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(NightTimeFreeze,GameAssembly.dll,2B FA 89 7B 20) // should be unique
+alloc(newmemc,$1000,NightTimeFreeze)
+
+label(codec)
+label(returnc)
+
+newmemc:
+  add edi,edx
+codec:
+  sub edi,edx
+  mov [rbx+20],edi
+  jmp returnc
+
+NightTimeFreeze:
+  jmp newmemc
+returnc:
+registersymbol(NightTimeFreeze)
+
+[DISABLE]
+
+NightTimeFreeze:
+  db 2B FA 89 7B 20
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+4FCF9A
+
+GameAssembly.dll+4FCF76: 83 B9 E0 00 00 00 00  - cmp dword ptr [rcx+000000E0],00
+GameAssembly.dll+4FCF7D: 75 05                 - jne GameAssembly.dll+4FCF84
+GameAssembly.dll+4FCF7F: E8 6C F3 E3 FF        - call GameAssembly.il2cpp_runtime_class_init
+GameAssembly.dll+4FCF84: 8B 43 24              - mov eax,[rbx+24]
+GameAssembly.dll+4FCF87: 8B D7                 - mov edx,edi
+GameAssembly.dll+4FCF89: F7 DA                 - neg edx
+GameAssembly.dll+4FCF8B: C7 43 24 00 00 00 00  - mov [rbx+24],00000000
+GameAssembly.dll+4FCF92: 0F 48 D7              - cmovs edx,edi
+GameAssembly.dll+4FCF95: 8B 7B 20              - mov edi,[rbx+20]
+GameAssembly.dll+4FCF98: 03 F8                 - add edi,eax
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+4FCF9A: 2B FA                 - sub edi,edx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+4FCF9C: 89 7B 20              - mov [rbx+20],edi
+GameAssembly.dll+4FCF9F: 48 8B 0D C2 63 D1 03  - mov rcx,[GameAssembly.dll+4213368]
+GameAssembly.dll+4FCFA6: 83 B9 E0 00 00 00 00  - cmp dword ptr [rcx+000000E0],00
+GameAssembly.dll+4FCFAD: 75 05                 - jne GameAssembly.dll+4FCFB4
+GameAssembly.dll+4FCFAF: E8 3C F3 E3 FF        - call GameAssembly.il2cpp_runtime_class_init
+GameAssembly.dll+4FCFB4: 33 D2                 - xor edx,edx
+GameAssembly.dll+4FCFB6: 8B CF                 - mov ecx,edi
+GameAssembly.dll+4FCFB8: E8 C3 0A F0 FF        - call DEYU.Utils.UnityEngineExtensionStatic.ClampPositive
+GameAssembly.dll+4FCFBD: 89 43 20              - mov [rbx+20],eax
+GameAssembly.dll+4FCFC0: EB 27                 - jmp GameAssembly.dll+4FCFE9
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>195</ID>
+          <Description>"转转料理必成功"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-03-26
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(ZhuanZhuanSuccess,GameAssembly.dll,F3 0F 10 4B 58 0F) // should be unique
+alloc(newmeme,$100,ZhuanZhuanSuccess)
+label(codee)
+label(returne)
+
+newmeme:
+codee:
+  xorps xmm1,xmm1
+  jmp returne
+
+ZhuanZhuanSuccess:
+  jmp newmeme
+returne:
+registersymbol(ZhuanZhuanSuccess)
+
+[DISABLE]
+
+ZhuanZhuanSuccess:
+  db F3 0F 10 4B 58
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+796530
+
+GameAssembly.dll+796502: 48 8B D0                 - mov rdx,rax
+GameAssembly.dll+796505: F3 44 0F 11 44 24 28     - movss [rsp+28],xmm8
+GameAssembly.dll+79650C: 48 8D 4C 24 30           - lea rcx,[rsp+30]
+GameAssembly.dll+796511: E8 0A E7 50 02           - call UnityEngine.Camera.WorldToScreenPoint
+GameAssembly.dll+796516: F3 0F 10 0D 5E 07 7D 02  - movss xmm1,[GameAssembly.dll+2F66C7C]
+GameAssembly.dll+79651E: 45 33 C0                 - xor r8d,r8d
+GameAssembly.dll+796521: 0F 57 C0                 - xorps xmm0,xmm0
+GameAssembly.dll+796524: F2 0F 10 30              - movsd xmm6,[rax]
+GameAssembly.dll+796528: 8B 68 08                 - mov ebp,[rax+08]
+GameAssembly.dll+79652B: E8 B0 6D 55 02           - call UnityEngine.Random.Range
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+796530: F3 0F 10 4B 58           - movss xmm1,[rbx+58]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+796535: 0F 2F C8                 - comiss xmm1,xmm0
+GameAssembly.dll+796538: 0F 83 31 01 00 00        - jae GameAssembly.dll+79666F
+GameAssembly.dll+79653E: 80 3D 51 BB C5 03 00     - cmp byte ptr [GameAssembly.dll+43F2096],00
+GameAssembly.dll+796545: 48 8B 73 68              - mov rsi,[rbx+68]
+GameAssembly.dll+796549: 75 13                    - jne GameAssembly.dll+79655E
+GameAssembly.dll+79654B: 48 8D 0D 66 08 A8 03     - lea rcx,[GameAssembly.dll+4216DB8]
+GameAssembly.dll+796552: E8 39 5B BA FF           - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+796557: C6 05 38 BB C5 03 01     - mov byte ptr [GameAssembly.dll+43F2096],01
+GameAssembly.dll+79655E: 48 8B 0D 53 08 A8 03     - mov rcx,[GameAssembly.dll+4216DB8]
+GameAssembly.dll+796565: E8 36 F6 99 00           - call GameAssembly.dll+1135BA0
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>196</ID>
+          <Description>"月光厨具必生成兔子"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-03-28
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(MoonLightSuccess,GameAssembly.dll,0F 2F 47 28 0F 86 CE 02 00 00) // should be unique
+alloc(newmemf,$100,MoonLightSuccess)
+
+label(codef)
+label(returnf)
+
+newmemf:
+  xorps xmm0,xmm0
+codef:
+  comiss xmm0,[rdi+28]
+  jae GameAssembly.dll+778935
+  jmp returnf
+
+MoonLightSuccess:
+  jmp newmemf
+  nop 5
+returnf:
+registersymbol(MoonLightSuccess)
+
+[DISABLE]
+
+MoonLightSuccess:
+  db 0F 2F 47 28 0F 86 CE 02 00 00
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+77865D
+
+GameAssembly.dll+77862D: E8 5E 3A BC FF           - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+778632: C6 05 DA 99 C7 03 01     - mov byte ptr [GameAssembly.dll+43F2013],01
+GameAssembly.dll+778639: F3 0F 10 35 3B E6 7E 02  - movss xmm6,[GameAssembly.dll+2F66C7C]
+GameAssembly.dll+778641: 45 33 FF                 - xor r15d,r15d
+GameAssembly.dll+778644: 0F 28 CE                 - movaps xmm1,xmm6
+GameAssembly.dll+778647: 4C 89 BC 24 90 00 00 00  - mov [rsp+00000090],r15
+GameAssembly.dll+77864F: 45 33 C0                 - xor r8d,r8d
+GameAssembly.dll+778652: 0F 57 C0                 - xorps xmm0,xmm0
+GameAssembly.dll+778655: 0F 57 FF                 - xorps xmm7,xmm7
+GameAssembly.dll+778658: E8 83 4C 57 02           - call UnityEngine.Random.Range
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+77865D: 0F 2F 47 28              - comiss xmm0,[rdi+28]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+778661: 0F 86 CE 02 00 00        - jbe GameAssembly.dll+778935
+GameAssembly.dll+778667: 48 8B 0D 7A 66 A8 03     - mov rcx,[GameAssembly.dll+41FECE8]
+GameAssembly.dll+77866E: 48 89 9C 24 98 00 00 00  - mov [rsp+00000098],rbx
+GameAssembly.dll+778676: 48 89 AC 24 A0 00 00 00  - mov [rsp+000000A0],rbp
+GameAssembly.dll+77867E: 48 89 B4 24 A8 00 00 00  - mov [rsp+000000A8],rsi
+GameAssembly.dll+778686: 4C 89 74 24 70           - mov [rsp+70],r14
+GameAssembly.dll+77868B: E8 60 3B BC FF           - call GameAssembly.il2cpp_method_get_class+40
+GameAssembly.dll+778690: 48 8B D8                 - mov rbx,rax
+GameAssembly.dll+778693: 48 85 C0                 - test rax,rax
+GameAssembly.dll+778696: 0F 84 AB 02 00 00        - je GameAssembly.dll+778947
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>203</ID>
+          <Description>"客人预算取上限（对已出现的客人无效）"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-04-01
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(CusMoneyRandom,GameAssembly.dll,8B C8 FF C2 E8 C1 28 67 02) // should be unique
+CusMoneyRandom:
+  db 8b ca
+registersymbol(CusMoneyRandom)
+
+[DISABLE]
+
+CusMoneyRandom:
+  db 8B C8
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+67E546
+GameData.Core.Collections.NightSceneUtility.GuestBase.GenerateFund: 40 53                 - push rbx
+GameAssembly.dll+67E4F2: 48 83 EC 30           - sub rsp,30
+GameAssembly.dll+67E4F6: 80 3D 9D 32 D7 03 00  - cmp byte ptr [GameAssembly.dll+43F179A],00
+GameAssembly.dll+67E4FD: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+67E505: 75 1F                 - jne GameAssembly.dll+67E526
+GameAssembly.dll+67E507: 48 8D 0D C2 50 B9 03  - lea rcx,[GameAssembly.dll+42135D0]
+GameAssembly.dll+67E50E: E8 7D DB CB FF        - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+67E513: 48 8D 0D AE 34 B6 03  - lea rcx,[GameAssembly.dll+41E19C8]
+GameAssembly.dll+67E51A: E8 71 DB CB FF        - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+67E51F: C6 05 74 32 D7 03 01  - mov byte ptr [GameAssembly.dll+43F179A],01
+GameAssembly.dll+67E526: 48 8B 13              - mov rdx,[rbx]
+GameAssembly.dll+67E529: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll+67E52C: 48 8B 82 C8 01 00 00  - mov rax,[rdx+000001C8]
+GameAssembly.dll+67E533: 48 8B 92 D0 01 00 00  - mov rdx,[rdx+000001D0]
+GameAssembly.dll+67E53A: FF D0                 - call rax
+GameAssembly.dll+67E53C: 48 8B D0              - mov rdx,rax
+GameAssembly.dll+67E53F: 45 33 C0              - xor r8d,r8d
+GameAssembly.dll+67E542: 48 C1 EA 20           - shr rdx,20
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+67E546: 8B C8                 - mov ecx,eax                          // mov ecx,edx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+67E548: FF C2                 - inc edx
+GameAssembly.dll+67E54A: E8 51 ED 66 02        - call UnityEngine.Random.Range
+GameAssembly.dll+67E54F: 48 8B 0D 72 34 B6 03  - mov rcx,[GameAssembly.dll+41E19C8]
+GameAssembly.dll+67E556: 8B D8                 - mov ebx,eax
+GameAssembly.dll+67E558: 83 B9 E0 00 00 00 00  - cmp dword ptr [rcx+000000E0],00
+GameAssembly.dll+67E55F: 75 05                 - jne GameAssembly.dll+67E566
+GameAssembly.dll+67E561: E8 8A DD CB FF        - call GameAssembly.il2cpp_runtime_class_init
+GameAssembly.dll+67E566: 80 3D DA 32 D7 03 00  - cmp byte ptr [GameAssembly.dll+43F1847],00
+GameAssembly.dll+67E56D: 75 13                 - jne GameAssembly.dll+67E582
+GameAssembly.dll+67E56F: 48 8D 0D 52 34 B6 03  - lea rcx,[GameAssembly.dll+41E19C8]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>201</ID>
+          <Description>"客人多倍预算（默认1倍，对已出现的客人无效，可以和上面那个一起开）"</Description>
+          <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-04-01
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(CusMoney,GameAssembly.dll,89 43 6C 89 43 70 8B) // should be unique
+alloc(newmemg,$100,CusMoney)
+label(codeg)
+label(returng)
+label(MoneyMulti)
+registersymbol(MoneyMulti)
+
+
+newmemg:
+  imul eax,[MoneyMulti]
+codeg:
+  mov [rbx+6C],eax
+  mov [rbx+70],eax
+  jmp returng
+MoneyMulti:
+  db 01 00 00 00
+
+CusMoney:
+  jmp newmemg
+  nop
+returng:
+registersymbol(CusMoney)
+
+[DISABLE]
+
+CusMoney:
+  db 89 43 6C 89 43 70
+
+unregistersymbol(*)
+dealloc(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+5151BC
+
+GameAssembly.dll+515188: 48 8B 88 B8 00 00 00  - mov rcx,[rax+000000B8]
+GameAssembly.dll+51518F: 48 89 79 20           - mov [rcx+20],rdi
+GameAssembly.dll+515193: 48 8B 05 46 27 CF 03  - mov rax,[GameAssembly.dll+42078E0]
+GameAssembly.dll+51519A: 48 8B 88 B8 00 00 00  - mov rcx,[rax+000000B8]
+GameAssembly.dll+5151A1: 48 83 C1 20           - add rcx,20
+GameAssembly.dll+5151A5: E8 E6 69 E2 FF        - call GameAssembly.il2cpp_value_box+20
+GameAssembly.dll+5151AA: 4C 8B 05 5F 67 D0 03  - mov r8,[GameAssembly.dll+421B910]
+GameAssembly.dll+5151B1: 48 8B D7              - mov rdx,rdi
+GameAssembly.dll+5151B4: 48 8B CD              - mov rcx,rbp
+GameAssembly.dll+5151B7: E8 C4 F3 7F 00        - call GameAssembly.dll+D14580
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+5151BC: 89 43 6C              - mov [rbx+6C],eax
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+5151BF: 89 43 70              - mov [rbx+70],eax
+GameAssembly.dll+5151C2: 8B 84 24 80 00 00 00  - mov eax,[rsp+00000080]
+GameAssembly.dll+5151C9: 89 43 3C              - mov [rbx+3C],eax
+GameAssembly.dll+5151CC: 44 89 73 74           - mov [rbx+74],r14d
+GameAssembly.dll+5151D0: 48 8B 0D 81 79 D0 03  - mov rcx,[GameAssembly.dll+421CB58]
+GameAssembly.dll+5151D7: E8 24 EB AE FF        - call GameAssembly.mono_restore_context+6C0
+GameAssembly.dll+5151DC: 48 8D 8B 58 01 00 00  - lea rcx,[rbx+00000158]
+GameAssembly.dll+5151E3: 48 89 83 58 01 00 00  - mov [rbx+00000158],rax
+GameAssembly.dll+5151EA: 48 8B D0              - mov rdx,rax
+GameAssembly.dll+5151ED: E8 9E 69 E2 FF        - call GameAssembly.il2cpp_value_box+20
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>202</ID>
+              <Description>"预算倍率"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MoneyMulti</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>198</ID>
+      <Description>"---------------------------------------------------------------------------------------------"</Description>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>174</ID>
+      <Description>"Debug（请勿随意激活，游戏崩了后果自负）"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>171</ID>
+          <Description>"真实时间"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-03-22
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(TimeA,GameAssembly.dll,75 4F 48 8D 0D 33 17 BF 03) // should be unique
+alloc(newmem,$1000,TimeA)
+label(return)
+label(code)
+registersymbol(code)
+registersymbol(TimeA)
+registersymbol(newmem)
+
+newmem:
+  mov [newmem+20],rax
+  jmp code
+newmem+20:
+  dq 00 00 00 00 00 00 00 00
+align 10
+code:
+  readmem(TimeA,9)
+  jmp return
+
+TimeA:
+  jmp newmem
+  nop 4
+return:
+
+
+[DISABLE]
+
+TimeA:
+  readmem(code,9)
+unregistersymbol(*)
+dealloc(*)
+
+{
+GameData.RunTime.DaySceneUtility.RunTimeDayScene.WarpActions: 48 89 5C 24 20        - mov [rsp+20],rbx
+GameAssembly.dll+616405: 56                    - push rsi
+GameAssembly.dll+616406: 48 83 EC 20           - sub rsp,20
+GameAssembly.dll+61640A: 80 3D DB E8 DE 03 00  - cmp byte ptr [GameAssembly.dll+4404CEC],00
+GameAssembly.dll+616411: 48 8B DA              - mov rbx,rdx
+GameAssembly.dll+616414: 8B F1                 - mov esi,ecx
+GameAssembly.dll+616416: 75 43                 - jne GameAssembly.dll+61645B
+GameAssembly.dll+616418: 48 8D 0D 19 7F BD 03  - lea rcx,[GameAssembly.dll+41EE338]
+GameAssembly.dll+61641F: E8 AC 69 D2 FF        - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+616424: 48 8D 0D 2D 66 C2 03  - lea rcx,[GameAssembly.dll+423CA58]
+GameAssembly.dll+61642B: E8 A0 69 D2 FF        - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+616430: 48 8D 0D 59 8F BC 03  - lea rcx,[GameAssembly.dll+41DF390]
+GameAssembly.dll+616437: E8 94 69 D2 FF        - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+61643C: 48 8D 0D 55 90 BC 03  - lea rcx,[GameAssembly.dll+41DF498]
+GameAssembly.dll+616443: E8 88 69 D2 FF        - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+616448: 48 8D 0D 89 32 C2 03  - lea rcx,[GameAssembly.dll+42396D8]
+GameAssembly.dll+61644F: E8 7C 69 D2 FF        - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+616454: C6 05 91 E8 DE 03 01  - mov byte ptr [GameAssembly.dll+4404CEC],01
+GameAssembly.dll+61645B: 48 89 6C 24 30        - mov [rsp+30],rbp
+GameAssembly.dll+616460: 48 89 7C 24 38        - mov [rsp+38],rdi
+GameAssembly.dll+616465: 4C 89 74 24 40        - mov [rsp+40],r14
+GameAssembly.dll+61646A: 85 F6                 - test esi,esi
+GameAssembly.dll+61646C: 0F 84 B6 03 00 00     - je GameAssembly.dll+616828
+GameAssembly.dll+616472: 0F B6 0D EA DE DE 03  - movzx ecx,byte ptr [GameAssembly.dll+4404363]
+GameAssembly.dll+616479: 84 C9                 - test cl,cl
+GameAssembly.dll+61647B: 75 14                 - jne GameAssembly.dll+616491
+GameAssembly.dll+61647D: 48 8D 0D DC F4 BD 03  - lea rcx,[GameAssembly.dll+41F5960]
+GameAssembly.dll+616484: E8 47 69 D2 FF        - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+616489: B1 01                 - mov cl,01
+GameAssembly.dll+61648B: 88 0D D2 DE DE 03     - mov [GameAssembly.dll+4404363],cl
+GameAssembly.dll+616491: 48 8B 15 C8 F4 BD 03  - mov rdx,[GameAssembly.dll+41F5960]
+GameAssembly.dll+616498: 48 8B 82 B8 00 00 00  - mov rax,[rdx+000000B8]
+GameAssembly.dll+61649F: 8B 78 68              - mov edi,[rax+68]
+GameAssembly.dll+6164A2: 84 C9                 - test cl,cl
+GameAssembly.dll+6164A4: 75 1A                 - jne GameAssembly.dll+6164C0
+GameAssembly.dll+6164A6: 48 8D 0D B3 F4 BD 03  - lea rcx,[GameAssembly.dll+41F5960]
+GameAssembly.dll+6164AD: E8 1E 69 D2 FF        - call GameAssembly.il2cpp_get_exception_argument_null+2A0
+GameAssembly.dll+6164B2: 48 8B 15 A7 F4 BD 03  - mov rdx,[GameAssembly.dll+41F5960]   #DayTimeBase
+GameAssembly.dll+6164B9: C6 05 A3 DE DE 03 01  - mov byte ptr [GameAssembly.dll+4404363],01
+GameAssembly.dll+6164C0: 2B FE                 - sub edi,esi
+GameAssembly.dll+6164C2: 48 8B 82 B8 00 00 00  - mov rax,[rdx+000000B8]   #DayTimeBasePointer 1
+GameAssembly.dll+6164C9: 8B 48 68              - mov ecx,[rax+68]   #DayTimeBasePointer 2
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>197</ID>
+          <Description>"料理开始函数"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Touhou Mystia Izakaya.exe
+  Version: 
+  Date   : 2025-03-28
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(INJECT,GameAssembly.dll,40 53 48 83 EC 20 33 D2 48 8B D9 E8 00 03 00 00 84 C0 74 1F) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  push rbx
+  sub rsp,20
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 40 53 48 83 EC 20
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameData.Core.Collections.Cooker.OnStartCook
+
+GameAssembly.dll+67A102: E8 49 21 CC FF  - call GameAssembly.il2cpp_method_get_class+A0
+GameAssembly.dll+67A107: CC              - int 3 
+GameAssembly.dll+67A108: CC              - int 3 
+GameAssembly.dll+67A109: CC              - int 3 
+GameAssembly.dll+67A10A: CC              - int 3 
+GameAssembly.dll+67A10B: CC              - int 3 
+GameAssembly.dll+67A10C: CC              - int 3 
+GameAssembly.dll+67A10D: CC              - int 3 
+GameAssembly.dll+67A10E: CC              - int 3 
+GameAssembly.dll+67A10F: CC              - int 3 
+// ---------- INJECTING HERE ----------
+GameData.Core.Collections.Cooker.OnStartCook: 40 53           - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+67A112: 48 83 EC 20     - sub rsp,20
+GameAssembly.dll+67A116: 33 D2           - xor edx,edx
+GameAssembly.dll+67A118: 48 8B D9        - mov rbx,rcx
+GameAssembly.dll+67A11B: E8 00 03 00 00  - call GameData.Core.Collections.Cooker.get_CanTriggerSpecialCookerSkill
+GameAssembly.dll+67A120: 84 C0           - test al,al
+GameAssembly.dll+67A122: 74 1F           - je GameAssembly.dll+67A143
+GameAssembly.dll+67A124: 48 8B 4B 20     - mov rcx,[rbx+20]
+GameAssembly.dll+67A128: 48 85 C9        - test rcx,rcx
+GameAssembly.dll+67A12B: 74 1C           - je GameAssembly.dll+67A149
+GameAssembly.dll+67A12D: 48 8B 01        - mov rax,[rcx]
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
