@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"首先激活这个-----------启用Mono"</Description>
+      <Color>0000FF</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if process and readInteger(process) ~= 0 then
+    mono_initialize()
+    LaunchMonoDataCollector()
+else
+    local msg = 'No process detected.'
+    print(msg)
+    error(msg)
+end
+{$asm}
+[DISABLE]
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"创建角色无视天赋点限制"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1c5:
+nop 5
+
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+19d:
+nop 5
+
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+19d:
+nop 5
+
+[DISABLE]
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1c5:
+db E9 05 00 00 00
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+19d:
+db E9 05 00 00 00
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+19d:
+db E9 05 00 00 00
+
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1c5
+
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+19c: 4C 89 4D E0                    - mov [rbp-20],r9
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1a0: 4C 8B 4D D0                    - mov r9,[rbp-30]
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1a4: 4C 89 4D E8                    - mov [rbp-18],r9
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1a8: 4C 8B 4D D8                    - mov r9,[rbp-28]
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1ac: 4C 89 4D F0                    - mov [rbp-10],r9
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1b0: 4D 8D 00                       - lea r8,[r8]
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1b3: 83 38 00                       - cmp dword ptr [rax],00
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1b6: 49 BB 10 5F 2D AF E8 01 00 00  - mov r11,ZhanGuoWuxia.UI.UIManager:AddTip
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1c0: 41 FF D3                       - call r11
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1c3: 33 C0                          - xor eax,eax
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1c5: E9 05 00 00 00                 - jmp ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1cf
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1ca: B8 01 00 00 00                 - mov eax,00000001
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1cf: 4C 8B 7D F8                    - mov r15,[rbp-08]
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1d3: 48 8D 65 00                    - lea rsp,[rbp+00]
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1d7: 5D                             - pop rbp
+ZhanGuoWuxia.UI.CreateRole.RC_AffixModifierView:ValidatePointEnough+1d8: C3                             - ret
+1E8AF2D1A39: 00 00                          - add [rax],al
+1E8AF2D1A3B: 00 00                          - add [rax],al
+1E8AF2D1A3D: 00 00                          - add [rax],al
+1E8AF2D1A3F: 00 01                          - add [rcx],al
+1E8AF2D1A41: 04 02                          - add al,02
+}
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+19d
+
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+174: 4C 89 4D D8                    - mov [rbp-28],r9
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+178: 4C 8B 4D C8                    - mov r9,[rbp-38]
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+17c: 4C 89 4D E0                    - mov [rbp-20],r9
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+180: 4C 8B 4D D0                    - mov r9,[rbp-30]
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+184: 4C 89 4D E8                    - mov [rbp-18],r9
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+188: 4D 8D 00                       - lea r8,[r8]
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+18b: 83 38 00                       - cmp dword ptr [rax],00
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+18e: 49 BB 10 5F 2D AF E8 01 00 00  - mov r11,ZhanGuoWuxia.UI.UIManager:AddTip
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+198: 41 FF D3                       - call r11
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+19b: 33 C0                          - xor eax,eax
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+19d: E9 05 00 00 00                 - jmp ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+1a7
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+1a2: B8 01 00 00 00                 - mov eax,00000001
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+1a7: 48 8B 75 F0                    - mov rsi,[rbp-10]
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+1ab: 48 8B 7D F8                    - mov rdi,[rbp-08]
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+1af: 48 8D 65 00                    - lea rsp,[rbp+00]
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+1b3: 5D                             - pop rbp
+ZhanGuoWuxia.UI.CreateRole.RC_ItemModifierView:ValidatePointEnough+1b4: C3                             - ret
+1E8AF2DE0F5: 00 00                          - add [rax],al
+1E8AF2DE0F7: 00 01                          - add [rcx],al
+1E8AF2DE0F9: 04 02                          - add al,02
+1E8AF2DE0FB: 05 04 03 01 50                 - add eax,50010304
+}
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+19d
+
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+174: 4C 89 4D D8                    - mov [rbp-28],r9
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+178: 4C 8B 4D C8                    - mov r9,[rbp-38]
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+17c: 4C 89 4D E0                    - mov [rbp-20],r9
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+180: 4C 8B 4D D0                    - mov r9,[rbp-30]
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+184: 4C 89 4D E8                    - mov [rbp-18],r9
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+188: 4D 8D 00                       - lea r8,[r8]
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+18b: 83 38 00                       - cmp dword ptr [rax],00
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+18e: 49 BB 10 5F 2D AF E8 01 00 00  - mov r11,ZhanGuoWuxia.UI.UIManager:AddTip
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+198: 41 FF D3                       - call r11
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+19b: 33 C0                          - xor eax,eax
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+19d: E9 05 00 00 00                 - jmp ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+1a7
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+1a2: B8 01 00 00 00                 - mov eax,00000001
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+1a7: 48 8B 75 F0                    - mov rsi,[rbp-10]
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+1ab: 48 8B 7D F8                    - mov rdi,[rbp-08]
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+1af: 48 8D 65 00                    - lea rsp,[rbp+00]
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+1b3: 5D                             - pop rbp
+ZhanGuoWuxia.UI.CreateRole.RC_SkillModifierView:ValidatePointEnough+1b4: C3                             - ret
+1E8B056ACF5: 00 00                          - add [rax],al
+1E8B056ACF7: 00 01                          - add [rcx],al
+1E8B056ACF9: 04 02                          - add al,02
+1E8B056ACFB: 05 04 03 01 50                 - add eax,50010304
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"无限行动点"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+160:
+inc eax
+
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+4f:
+mov [r14+00000098],eax
+
+[DISABLE]
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+160:
+db 85 C0
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+4f:
+db 41 89 B6 98 00 00 00
+
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+159
+
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+123: E9 CB 02 00 00                 - jmp ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+3f3
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+128: 49 BA 48 EE 24 88 8E 01 00 00  - mov r10,0000018E8824EE48
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+132: 48 8D 6D 00                    - lea rbp,[rbp+00]
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+136: 49 BB A0 E6 30 88 8E 01 00 00  - mov r11,ZhanGuoWuxia.Backend.Pattern.Singleton`1[T_REF]:get_Instance
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+140: 41 FF D3                       - call r11
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+143: 83 38 00                       - cmp dword ptr [rax],00
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+146: 48 B8 D0 C4 98 C2 8E 01 00 00  - mov rax,0000018EC298C4D0
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+150: 48 8B 00                       - mov rax,[rax]
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+153: 48 8B C8                       - mov rcx,rax
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+156: 83 39 00                       - cmp dword ptr [rcx],00
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+159: 48 63 80 98 00 00 00           - movsxd  rax,dword ptr [rax+00000098]
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+160: 85 C0                          - test eax,eax
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+162: 0F 8F A8 00 00 00              - jg ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+210
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+168: 49 8B 47 18                    - mov rax,[r15+18]
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+16c: 48 8B C8                       - mov rcx,rax
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+16f: 83 39 00                       - cmp dword ptr [rcx],00
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+172: 48 63 80 88 00 00 00           - movsxd  rax,dword ptr [rax+00000088]
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+179: 85 C0                          - test eax,eax
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+17b: 0F 8E 8F 00 00 00              - jng ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+210
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+181: 48 B9 28 03 69 72 8D 01 00 00  - mov rcx,0000018D72690328
+ZhanGuoWuxia.UI.UIAreaInfo:OnActionSelected+18b: BA 01 00 00 00                 - mov edx,00000001
+}
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+4f
+
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+33: 4C 8B F8                       - mov r15,rax
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+36: 4C 8B F7                       - mov r14,rdi
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+39: 45 33 ED                       - xor r13d,r13d
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+3c: 4D 8B E7                       - mov r12,r15
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+3f: 41 3B F5                       - cmp esi,r13d
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+42: 7D 03                          - jnl ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+47
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+44: 49 8B F5                       - mov rsi,r13
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+47: 41 3B F4                       - cmp esi,r12d
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+4a: 7E 03                          - jle ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+4f
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+4c: 49 8B F4                       - mov rsi,r12
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+4f: 41 89 B6 98 00 00 00           - mov [r14+00000098],esi
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+56: 48 B8 58 DD B0 A8 8E 01 00 00  - mov rax,0000018EA8B0DD58
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+60: 48 8B 00                       - mov rax,[rax]
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+63: 48 8B C8                       - mov rcx,rax
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+66: 48 63 97 98 00 00 00           - movsxd  rdx,dword ptr [rdi+00000098]
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+6d: 89 50 10                       - mov [rax+10],edx
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+70: 44 89 79 14                    - mov [rcx+14],r15d
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+74: 66 90                          - nop 2
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+76: 49 BB F0 0F D2 38 8F 01 00 00  - mov r11,ZhanGuoWuxia.Backend.Event.EventManager:Broadcast
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+80: 41 FF D3                       - call r11
+ZhanGuoWuxia.Backend.RuntimeData.GameSave:set_CurrentActionCount+83: 48 8B 75 D0                    - mov rsi,[rbp-30]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>8</ID>
+      <Description>"物品栏最后一格物品数量"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+alloc(newmem,256)
+label(returnhere)
+label(ItemOriginalcode)
+registersymbol(ItemOriginalcode)
+registersymbol(itemcount)
+
+newmem:
+mov [itemcount],rsi
+
+ItemOriginalcode:
+readmem(ZhanGuoWuxia.UI.ItemView:UpdateView+516,17)
+jmp returnhere
+
+itemcount:
+dd
+
+ZhanGuoWuxia.UI.ItemView:UpdateView+516:
+jmp far newmem
+nop 3
+returnhere:
+ 
+[DISABLE]
+ZhanGuoWuxia.UI.ItemView:UpdateView+516:
+readmem(ItemOriginalcode,17)
+
+dealloc(*)
+unregistersymbol(*)
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.UI.ItemView:UpdateView+51d
+
+ZhanGuoWuxia.UI.ItemView:UpdateView+4f3: 33 D2                          - xor edx,edx
+ZhanGuoWuxia.UI.ItemView:UpdateView+4f5: 90                             - nop
+ZhanGuoWuxia.UI.ItemView:UpdateView+4f6: 49 BB F0 29 E4 DA 8D 01 00 00  - mov r11,UnityEngine.Object:op_Inequality
+ZhanGuoWuxia.UI.ItemView:UpdateView+500: 41 FF D3                       - call r11
+ZhanGuoWuxia.UI.ItemView:UpdateView+503: 85 C0                          - test eax,eax
+ZhanGuoWuxia.UI.ItemView:UpdateView+505: 0F 84 72 00 00 00              - je ZhanGuoWuxia.UI.ItemView:UpdateView+57d
+ZhanGuoWuxia.UI.ItemView:UpdateView+50b: 4C 8B BE 30 01 00 00           - mov r15,[rsi+00000130]
+ZhanGuoWuxia.UI.ItemView:UpdateView+512: 85 FF                          - test edi,edi
+ZhanGuoWuxia.UI.ItemView:UpdateView+514: 74 16                          - je ZhanGuoWuxia.UI.ItemView:UpdateView+52c
+ZhanGuoWuxia.UI.ItemView:UpdateView+516: 48 8B 86 50 01 00 00           - mov rax,[rsi+00000150]
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.UI.ItemView:UpdateView+51d: 48 8B C8                       - mov rcx,rax
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.UI.ItemView:UpdateView+520: 83 39 00                       - cmp dword ptr [rcx],00
+ZhanGuoWuxia.UI.ItemView:UpdateView+523: 48 63 40 30                    - movsxd  rax,dword ptr [rax+30]
+ZhanGuoWuxia.UI.ItemView:UpdateView+527: 83 F8 01                       - cmp eax,01
+ZhanGuoWuxia.UI.ItemView:UpdateView+52a: 7F 0C                          - jg ZhanGuoWuxia.UI.ItemView:UpdateView+538
+ZhanGuoWuxia.UI.ItemView:UpdateView+52c: 49 BE E0 0F C3 AC 8C 01 00 00  - mov r14,0000018CACC30FE0
+ZhanGuoWuxia.UI.ItemView:UpdateView+536: EB 36                          - jmp ZhanGuoWuxia.UI.ItemView:UpdateView+56e
+ZhanGuoWuxia.UI.ItemView:UpdateView+538: 48 8B 86 50 01 00 00           - mov rax,[rsi+00000150]
+ZhanGuoWuxia.UI.ItemView:UpdateView+53f: 48 8B C8                       - mov rcx,rax
+ZhanGuoWuxia.UI.ItemView:UpdateView+542: 83 39 00                       - cmp dword ptr [rcx],00
+ZhanGuoWuxia.UI.ItemView:UpdateView+545: 48 63 40 30                    - movsxd  rax,dword ptr [rax+30]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"物品数量"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>itemcount</Address>
+          <Offsets>
+            <Offset>30</Offset>
+            <Offset>150</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"物品数量不减"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+15c:
+nop 3
+ 
+[DISABLE]
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+15c:
+db 41 2B C6
+
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+15c
+
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+13e: 7F 09        - jg ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+149
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+140: 83 3F 00     - cmp dword ptr [rdi],00
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+143: 48 63 77 30  - movsxd  rsi,dword ptr [rdi+30]
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+147: EB 00        - jmp ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+149
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+149: 33 C0        - xor eax,eax
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+14b: 4C 8B F0     - mov r14,rax
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+14e: 44 3B F6     - cmp r14d,esi
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+151: 44 0F 4C F6  - cmovl r14d,esi
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+155: 83 3F 00     - cmp dword ptr [rdi],00
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+158: 48 63 47 30  - movsxd  rax,dword ptr [rdi+30]
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+15c: 41 2B C6     - sub eax,r14d
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+15f: 83 3F 00     - cmp dword ptr [rdi],00
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+162: 89 47 30     - mov [rdi+30],eax
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+165: 83 3F 00     - cmp dword ptr [rdi],00
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+168: 48 63 47 30  - movsxd  rax,dword ptr [rdi+30]
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+16c: 85 C0        - test eax,eax
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+16e: 7F 23        - jg ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+193
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+170: 41 83 3F 00  - cmp dword ptr [r15],00
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+174: 49 8B 47 30  - mov rax,[r15+30]
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+178: 48 8B C8     - mov rcx,rax
+ZhanGuoWuxia.Backend.Logics.MenpaiLogic:ReduceItem+17b: 48 8B D7     - mov rdx,rdi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>19</ID>
+      <Description>"虎焰点数（打开重燃虎焰界面）"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+alloc(newmem,256)
+label(returnhere)
+label(FirePointOriginalcode)
+registersymbol(FirePointOriginalcode)
+label(exit)
+registersymbol(firepointkey)
+
+newmem:
+mov [firepointkey],rcx
+
+FirePointOriginalcode:
+readmem(ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+41,15)
+
+exit:
+jmp returnhere
+
+firepointkey:
+dd
+
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+41:
+jmp far newmem
+nop
+
+returnhere:
+
+[DISABLE]
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+41:
+readmem(FirePointOriginalcode,15)
+
+dealloc(*)
+unregistersymbol(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+41
+
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+10: 48 B8 60 35 2A AB 4B 02 00 00  - mov rax,0000024BAB2A3560
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+1a: 48 8B 38                       - mov rdi,[rax]
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+1d: 48 8B C7                       - mov rax,rdi
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+20: 48 85 C0                       - test rax,rax
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+23: 0F 84 7A 00 00 00              - je ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+a3
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+29: 48 8D 64 24 00                 - lea rsp,[rsp+00]
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+2e: 49 BB 60 CB 8E 2C 4C 02 00 00  - mov r11,ZhanGuoWuxia.Backend.GameConst:get_FirePointKey
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+38: 41 FF D3                       - call r11
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+3b: 48 8B D0                       - mov rdx,rax
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+3e: 48 8B CF                       - mov rcx,rdi
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+41: 45 33 C0                       - xor r8d,r8d
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+44: 66 90                          - nop 2
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+46: 49 BB D0 C6 8E 2C 4C 02 00 00  - mov r11,ZhanGuoWuxia.Backend.Logics.GameSaveLogic:GetIntData
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+50: 41 FF D3                       - call r11
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+53: 48 8B F0                       - mov rsi,rax
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+56: 48 8B CF                       - mov rcx,rdi
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+59: 48 BA 00 08 90 AA 4B 02 00 00  - mov rdx,0000024BAA900800
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+63: 4C 8B C6                       - mov r8,rsi
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+66: 49 BB 10 E6 0F D6 4B 02 00 00  - mov r11,ZhanGuoWuxia.Backend.Logics.GameSaveLogic:SetIntData
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+70: 41 FF D3                       - call r11
+ZhanGuoWuxia.GameRuntime:MarkRestoreAsViewed+73: 48 B8 50 29 B5 AC 49 02 00 00  - mov rax,00000249ACB52950
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"点数"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>firepointkey</Address>
+          <Offsets>
+            <Offset>+0*18+20+10</Offset>
+            <Offset>+18</Offset>
+            <Offset>+28</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>"点数"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>firepointkey</Address>
+          <Offsets>
+            <Offset>+1*18+20+10</Offset>
+            <Offset>+18</Offset>
+            <Offset>+28</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"属性药可超出上限使用"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+b0:
+jmp ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+1ed
+nop
+
+[DISABLE]
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+b0:
+db 0F 8C 37 01 00 00
+
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+b0
+
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+85: 48 89 45 90                    - mov [rbp-70],rax
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+89: 48 8B CE                       - mov rcx,rsi
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+8c: 83 3E 00                       - cmp dword ptr [rsi],00
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+8f: 48 8D AD 00 00 00 00           - lea rbp,[rbp+00000000]
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+96: 49 BB E0 50 7B 38 A9 02 00 00  - mov r11,ZhanGuoWuxia.Backend.RuntimeData.ItemInstance:get_UsageLimit
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+a0: 41 FF D3                       - call r11
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+a3: 48 8B C8                       - mov rcx,rax
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+a6: 48 8B 45 90                    - mov rax,[rbp-70]
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+aa: 48 63 C9                       - movsxd  rcx,ecx
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+ad: 48 3B C1                       - cmp rax,rcx
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+b0: 0F 8C 37 01 00 00              - jl ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+1ed
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+b6: 48 B9 08 63 D7 7E A7 02 00 00  - mov rcx,000002A77ED76308
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+c0: BA 02 00 00 00                 - mov edx,00000002
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+c5: 90                             - nop
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+c6: 49 BB D0 22 EC 97 A5 02 00 00  - mov r11,System.Object:__icall_wrapper_ves_icall_array_new_specific
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+d0: 41 FF D3                       - call r11
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+d3: 48 89 85 78 FF FF FF           - mov [rbp-00000088],rax
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+da: 48 89 45 80                    - mov [rbp-80],rax
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+de: 48 8B 87 90 00 00 00           - mov rax,[rdi+00000090]
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+e5: 48 8B C8                       - mov rcx,rax
+ZhanGuoWuxia.UI.InventoryController:IsItemUsageCountMax+e8: 83 38 00                       - cmp dword ptr [rax],00
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"商店物品不减反增"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1ec:
+add r12d,ecx
+ 
+[DISABLE]
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1ec:
+db 44 2B E1
+
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1ec
+
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1bd: 83 39 00                       - cmp dword ptr [rcx],00
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1c0: 48 63 40 28                    - movsxd  rax,dword ptr [rax+28]
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1c4: 48 89 85 C0 FE FF FF           - mov [rbp-00000140],rax
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1cb: 49 8B CD                       - mov rcx,r13
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1ce: 49 8B 45 00                    - mov rax,[r13+00]
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1d2: 49 BA 88 63 A7 ED 00 02 00 00  - mov r10,00000200EDA76388
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1dc: FF 50 F0                       - call qword ptr [rax-10]
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1df: 48 8B C8                       - mov rcx,rax
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1e2: 48 8B 85 C0 FE FF FF           - mov rax,[rbp-00000140]
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1e9: 4C 8B E0                       - mov r12,rax
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1ec: 44 2B E1                       - sub r12d,ecx
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1ef: 48 8B 85 68 FF FF FF           - mov rax,[rbp-00000098]
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1f6: 33 C9                          - xor ecx,ecx
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1f8: 41 3B CC                       - cmp ecx,r12d
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1fb: 41 0F 4C CC                    - cmovl ecx,r12d
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+1ff: 83 38 00                       - cmp dword ptr [rax],00
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+202: 89 48 28                       - mov [rax+28],ecx
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+205: 48 8B 85 E0 FE FF FF           - mov rax,[rbp-00000120]
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+20c: 48 8B 40 10                    - mov rax,[rax+10]
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+210: 48 89 85 D8 FE FF FF           - mov [rbp-00000128],rax
+ZhanGuoWuxia.Backend.Logics.ShopLogic:MakeDeal+217: 48 8B 85 68 FF FF FF           - mov rax,[rbp-00000098]
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>36</ID>
+      <Description>"装备随机词条取上限"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+alloc(newmem1,256,ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+596)
+label(returnhere)
+label(originalcodeA)
+registersymbol(originalcodeA)
+label(EquipEffectMul)
+registersymbol(EquipEffectMul)
+
+newmem1:
+mulss xmm1,[EquipEffectMul]
+movss xmm0,xmm1
+xorps xmm1,xmm1
+jmp returnhere
+
+originalcodeA:
+readmem(ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+596,13)
+
+EquipEffectMul:
+dd (float)1.0
+
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+596:
+jmp newmem1
+nop 8
+returnhere:
+
+[DISABLE]
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+596:
+readmem(originalcodeA,13)
+
+dealloc(*)
+unregistersymbol(*)
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+596
+
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+56d: 83 3E 00                       - cmp dword ptr [rsi],00
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+570: F3 0F 10 4E 1C                 - movss xmm1,[rsi+1C]
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+575: F3 0F 5A C9                    - cvtss2sd xmm1,xmm1
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+579: F2 0F 5A E9                    - cvtsd2ss xmm5,xmm1
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+57d: F3 0F 11 6D A4                 - movss [rbp-5C],xmm5
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+582: F3 0F 10 4D A4                 - movss xmm1,[rbp-5C]
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+587: F3 0F 5A C9                    - cvtss2sd xmm1,xmm1
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+58b: F2 0F 5A C9                    - cvtsd2ss xmm1,xmm1
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+58f: F2 0F 5A C0                    - cvtsd2ss xmm0,xmm0
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+593: 66 66 90                       - nop 3
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+596: 49 BB E0 45 9D C5 8B 01 00 00  - mov r11,ZhanGuoWuxia.Backend.Tools.MathTool:GetRandom
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5a0: 41 FF D3                       - call r11
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5a3: F3 0F 5A C0                    - cvtss2sd xmm0,xmm0
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5a7: F2 0F 5A E8                    - cvtsd2ss xmm5,xmm0
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5ab: F3 0F 11 6D 8C                 - movss [rbp-74],xmm5
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5b0: F3 0F 10 45 8C                 - movss xmm0,[rbp-74]
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5b5: F3 0F 5A C0                    - cvtss2sd xmm0,xmm0
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5b9: 48 8B 8D 60 FF FF FF           - mov rcx,[rbp-000000A0]
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5c0: 48 8B 55 90                    - mov rdx,[rbp-70]
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5c4: F2 0F 10 D0                    - movsd xmm2,xmm0
+ZhanGuoWuxia.Backend.RuntimeData.ItemAffixInstance:GenerateRuntimeEffects+5c8: F2 0F 5A D2                    - cvtsd2ss xmm2,xmm2
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>37</ID>
+          <Description>"随机词条倍率"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>EquipEffectMul</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>38</ID>
+      <Description>"----------------Debug用----------------"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <Color>C0C0C0</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>31</ID>
+          <Description>"装备词条"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : WindstopStrategy.exe
+  Version: 
+  Date   : 2026-01-18
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,ERROR: Could not find unique AOB, tried code "8B EC 48 83 EC 50") // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov ebp,esp
+  sub rsp,50
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 8B EC 48 83 EC 50
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+2
+
+18B60F94AB1: 00 00                          - add [rax],al
+18B60F94AB3: 00 00                          - add [rax],al
+18B60F94AB5: 00 00                          - add [rax],al
+18B60F94AB7: 00 00                          - add [rax],al
+18B60F94AB9: 00 00                          - add [rax],al
+18B60F94ABB: 00 00                          - add [rax],al
+18B60F94ABD: 00 00                          - add [rax],al
+18B60F94ABF: 00 55 48                       - add [rbp+48],dl
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+2: 8B EC                          - mov ebp,esp
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+4: 48 83 EC 50                    - sub rsp,50
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+8: 4C 89 75 F8                    - mov [rbp-08],r14
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+c: 4C 8B F1                       - mov r14,rcx
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+f: 48 89 55 F0                    - mov [rbp-10],rdx
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+13: 4C 89 45 E8                    - mov [rbp-18],r8
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+17: 4C 89 4D E0                    - mov [rbp-20],r9
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+1b: 49 B8 A0 AA 81 04 88 01 00 00  - mov r8,000001880481AAA0
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+25: 49 8B 06                       - mov rax,[r14]
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+28: 49 BA 60 3C DF 5B 8B 01 00 00  - mov r10,0000018B5BDF3C60
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+32: FF 50 C0                       - call qword ptr [rax-40]
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+35: 48 8B C8                       - mov rcx,rax
+ZhanGuoWuxia.Backend.Logics.ItemLogic:CreateItemInstance+38: 83 38 00                       - cmp dword ptr [rax],00
+}{
+// ORIGINAL CODE - INJECTION POINT: ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix
+
+18B60F94B8C: 00 00                    - add [rax],al
+18B60F94B8E: 00 00                    - add [rax],al
+18B60F94B90: 00 00                    - add [rax],al
+18B60F94B92: 00 00                    - add [rax],al
+18B60F94B94: 00 00                    - add [rax],al
+18B60F94B96: 00 00                    - add [rax],al
+18B60F94B98: 00 00                    - add [rax],al
+18B60F94B9A: 00 00                    - add [rax],al
+18B60F94B9C: 00 00                    - add [rax],al
+18B60F94B9E: 00 00                    - add [rax],al
+// ---------- INJECTING HERE ----------
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix: 55                       - push rbp
+// ---------- DONE INJECTING  ----------
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+1: 48 8B EC                 - mov rbp,rsp
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+4: 48 83 EC 50              - sub rsp,50
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+8: 48 89 7D E8              - mov [rbp-18],rdi
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+c: 4C 89 75 F0              - mov [rbp-10],r14
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+10: 4C 89 7D F8              - mov [rbp-08],r15
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+14: 4C 8B F9                 - mov r15,rcx
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+17: 48 8B FA                 - mov rdi,rdx
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+1a: 4C 89 45 D8              - mov [rbp-28],r8
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+1e: 48 C7 45 E0 00 00 00 00  - mov qword ptr [rbp-20],00000000
+ZhanGuoWuxia.Backend.Logics.ItemLogic:AttachAffix+26: 49 8B CF                 - mov rcx,r15
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
