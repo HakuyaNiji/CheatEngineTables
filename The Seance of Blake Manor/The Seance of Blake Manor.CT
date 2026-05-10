@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"ActivateMono"</Description>
+      <Color>0000FF</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if process and readInteger(process) ~= 0 then
+    mono_initialize()
+    LaunchMonoDataCollector()
+else
+    local msg = 'No process detected.'
+    print(msg)
+    error(msg)
+end
+{$asm}
+[DISABLE]
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>5</ID>
+          <Description>"时间消耗为0"</Description>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : The Seance of Blake Manor.exe
+  Version: 
+  Date   : 2026-05-08
+  Author : 86152
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+62:
+nop 2
+
+[DISABLE]
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+62:
+db 03 D9
+{
+// ORIGINAL CODE - INJECTION POINT: SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+62
+
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+46: 8B 47 58        - mov eax,[edi+58]
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+49: 89 45 E8        - mov [ebp-18],eax
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+4c: 8D 6D 00        - lea ebp,[ebp+00]
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+4f: E8 C4 4A 65 1F  - call SpookyDoorway.EldritchHouse.Runtime.AC.EHKickStarter:get_EHTimeManager
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+54: 8B C8           - mov ecx,eax
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+56: 8B 45 E8        - mov eax,[ebp-18]
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+59: 8B D1           - mov edx,ecx
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+5b: 39 12           - cmp [edx],edx
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+5d: 8B 49 40        - mov ecx,[ecx+40]
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+60: 8B D8           - mov ebx,eax
+// ---------- INJECTING HERE ----------
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+62: 03 D9           - add ebx,ecx
+// ---------- DONE INJECTING  ----------
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+64: 8B C3           - mov eax,ebx
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+66: 89 45 EC        - mov [ebp-14],eax
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+69: 89 3C 24        - mov [esp],edi
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+6c: 8D 6D 00        - lea ebp,[ebp+00]
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+6f: E8 2C F3 14 22  - call SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:get_ReturnCopyOfActiveBucket
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+74: 8B C8           - mov ecx,eax
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+76: 8B 45 EC        - mov eax,[ebp-14]
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+79: 8B 49 20        - mov ecx,[ecx+20]
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+7c: 3B C1           - cmp eax,ecx
+SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+7e: 7E 05           - jle SpookyDoorway.EldritchHouse.Runtime.AC.RuntimeTimeManager:OnEventRaised+85
+}
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>53</Key>
+              </Keys>
+              <ID>0</ID>
+              <ActivateSound TTS="EN">{MRDescription} Activated</ActivateSound>
+              <DeactivateSound TTS="EN">{MRDescription} Deactivated</DeactivateSound>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
